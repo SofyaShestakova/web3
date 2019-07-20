@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="pip3:war">
+    <output-path>$PROJECT_DIR$/out/artifacts/pip3_war</output-path>
+    <root id="archive" name="pip3_war.war">
+      <element id="javaee-facet-resources" facet="pip3/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="pip3" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
