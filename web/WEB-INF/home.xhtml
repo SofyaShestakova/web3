@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://java.sun.com/jsf/composite" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ace="http://www.icefaces.org/icefaces/components" xmlns:b="http://java.sun.com/jsf/core" xml:lang="en"
+      lang="en">
+<h:head>
+    <title>Lab3</title>
+</h:head>
+<h:body onload="">
+    <table>
+    <tr>
+        <td id="header" colspan="3">
+            <p id="name">
+                Лабораторная работа №3<br/>
+                Группа P3202, Вариант 20258<br/>
+                Выполнила:  Шестакова Софья Александровна<br/>
+            </p>
+        </td>
+    </tr>
+        <tr id="content">
+            <td id="left-content-column">
+                <h:dataTable value="#{requestsData.requests}"
+                             var="req"
+                             id="history"
+                             styleClass="inner">
+                    <h:column>
+                        <f:facet name = "header">X</f:facet>
+                        ${req.x}
+                    </h:column>
+                    <h:column>
+                        <f:facet name = "header">Y</f:facet>
+                        ${req.y}
+                    </h:column>
+                    <h:column>
+                        <f:facet name = "header">Y</f:facet>
+                        ${req.r}
+                    </h:column>
+                    <h:column>
+                        <f:facet name = "header">RESULT</f:facet>
+                        ${req.result}
+                    </h:column>
+                </h:dataTable>
+            </td>
+            <td id="middle-content-column">
+                <h:form id="data-form">
+                    <fieldset>
+                        <legend>Значение X</legend>
+                        <h:selectOneMenu styleClass="input-class" value="#{areaCheck.currentXValue}"
+                                         id="x">
+                            <f:selectItems value="#{areaCheck.xPossibleValues}"/>
+                        </h:selectOneMenu>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Значение Y</legend>
+                        <h:inputText styleClass="input-class" value="#{areaCheck.currentYValue}" id="y"/>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Значение R</legend>
+                        <ace:sliderEntry styleClass="input-class" value="#{areaCheck.currentRValue}"
+                                         id="r">
+                        </ace:sliderEntry>
+                    </fieldset>
+                    <h:commandButton value="Отправить" action="#{navigationController.showPage()}" onmousedown="">
+                    </h:commandButton>
+                </h:form>
+                <div id="errors"></div>
+
+                <h:form id="graph-controls">
+                    <h:inputHidden value="#{areaCheck.hiddenXValue}" id="hidden-x"/>
+                    <h:inputHidden value="#{areaCheck.hiddenYValue}" id="hidden-y"/>
+                    <h:inputHidden value="#{areaCheck.hiddenRValue}" id="hidden-r"/>
+                    <h:inputHidden value="#{areaCheck.hiddenResultValue}" id="result"/>
+                    <!--p:remoteCommand name="validateGraph" update="result"
+                                     action="#{areaCheck.validateFromGraph()}"
+                                     oncomplete="drawPoint()"-->
+                </h:form>
+
+                <h:form id="db-inputs">
+                    <h:inputHidden value="#{requestsData.x}" id="db-x"/>
+                    <h:inputHidden value="#{requestsData.y}" id="db-y"/>
+                    <h:inputHidden value="#{requestsData.r}" id="db-r"/>
+                    <h:inputHidden value="#{requestsData.result}" id="db-result"/>
+                    <!--p:remoteCommand name="writeDB" update="@(#history)"
+                                     action="#{requestsData.addRequest()}"-->
+                </h:form>
+            </td>
+            <td id="right-content-column">
+                <p>Приложение определяет, входят ли указанные пользователем точки в заданную
+                    область.</p>
+                <div id="canvas-div" onmousedown="onCanvasClick(event)">
+                    <!--b:canvas id="canvas"
+                              style="background-color:#ffffff;
+                          border-radius: 20px;"
+                              width="300" height="300"-->
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td id="footer" colspan="3">
+                <h:form>
+                    <h:commandButton value="Стартовая страница"
+                                     action="#{navigationController.showPage()}">
+                        <f:param name="pageId" value="2"/>
+                    </h:commandButton>
+                </h:form>
+                <p id="footer-text">&copy; Университет ИТМО 2018</p>
+            </td>
+        </tr>
+    </table>
+</h:body>
+</html>
