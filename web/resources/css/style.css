@@ -1,7 +1,7 @@
 body {
-    background-color: #d9d8e3;
+    background-color: white;
     /* наследование */
-    color: #26364a;
+    color: lightpink;
     font-family: monospace;
 }
 
@@ -16,7 +16,7 @@ td > form {
 
 fieldset {
     text-align: left;
-    border: 3px solid #4d7198;
+    border: 3px solid hotpink;
     margin-bottom: 7px;
 }
 
@@ -26,26 +26,26 @@ input {
 
 /* селектор потомств - граница для картинок в таблицах */
 td img {
-    border: 3px solid #4d7198;
+    border: 3px solid hotpink;
     margin-top: 5px;
 }
 
 /* каскадирование */
 table.inner {
     width: 100%;
-    border: 3px solid #4d7198;
+    border: 3px solid hotpink;
     border-collapse: collapse;
     text-align: left;
     margin: auto;
 }
 
 table.inner td {
-    border: 1px solid #4d7198;
+    border: 1px solid hotpink;
 }
 
 table.inner th {
-    border-bottom: 3px solid #4d7198;
-    border-right: 1px solid #4d7198;
+    border-bottom: 3px solid hotpink;
+    border-right: 1px solid hotpink;
     padding: 7px;
 }
 
@@ -54,7 +54,7 @@ table.inner th {
     height: 80px;
     width: 100%;
     vertical-align: middle;
-    background-color: #4d7198;
+    background-color: hotpink;
     border-radius: 15px;
     margin: 5px;
 }
@@ -111,7 +111,7 @@ input[type="submit"]:hover, input[type="button"]:hover {
     background-color: #688bb0;
 }
 #clock {
-    color: #0071D0;
+    color: deeppink;
     font-weight: bold;
     font-size: 20px;
 }
