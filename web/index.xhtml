@@ -25,7 +25,7 @@
             <h:form>
                <div id="clock">
                </div>
-               <h:commandButton value="Домашняя страница" action="index?faces-redirect=true">
+               <h:commandButton value="Домашняя страница" action="#{navigationController.showPage()}">
                   <f:param name="pageId" value="1"/>
                </h:commandButton>
             </h:form>
