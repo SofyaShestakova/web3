@@ -1,14 +1,18 @@
 package ru.shestakova.util;
 
+import javax.faces.application.NavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+
 import lombok.Data;
 
+@SuppressWarnings("ALL")
 @ManagedBean(name = "navigationController", eager = true)
 @RequestScoped
 @Data
-public class NavigationController {
+public class NavigationController  extends NavigationHandler {
 
     public String getPageId() {
         return pageId;
@@ -30,15 +34,23 @@ public class NavigationController {
 
     public String showPage() {
         if (pageId == null) {
+            System.out.println("null");
             return "home";
         }
         if (pageId.equals("1")) {
+            System.out.println("1.home");
             return "home";
         } else if (pageId.equals("2")) {
-            return "start";
+            System.out.println("2.index");
+            return "index";
         } else {
+            System.out.println("else.home");
             return "home";
         }
+    }
+
+    public void handleNavigation(FacesContext facesContext, String s, String s1) {
+
     }
 }
 
