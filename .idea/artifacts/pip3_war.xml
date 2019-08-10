@@ -1,13 +1,14 @@
 <component name="ArtifactManager">
   <artifact type="war" build-on-make="true" name="pip3:war">
-    <output-path>$PROJECT_DIR$/out/artifacts/pip3_war</output-path>
-    <root id="archive" name="pip3_war.war">
-      <element id="javaee-facet-resources" facet="pip3/web/Web" />
-      <element id="directory" name="WEB-INF">
-        <element id="directory" name="classes">
-          <element id="module-output" name="pip3" />
-        </element>
-      </element>
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>pip3</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="internet-apps-lab3.war">
+      <element id="artifact" artifact-name="pip3:war exploded" />
     </root>
   </artifact>
 </component>
