@@ -8,6 +8,8 @@
       lang="en">
 <h:head>
     <title>Lab3</title>
+    <h:outputStylesheet library="css" name="style.css"/>
+    <h:outputStylesheet library="js" name="canvas.js"/>
 </h:head>
 <h:body onload="">
     <table>
@@ -73,9 +75,9 @@
                     <h:inputHidden value="#{areaCheck.hiddenYValue}" id="hidden-y"/>
                     <h:inputHidden value="#{areaCheck.hiddenRValue}" id="hidden-r"/>
                     <h:inputHidden value="#{areaCheck.hiddenResultValue}" id="result"/>
-                    <!--p:remoteCommand name="validateGraph" update="result"
+                    <p:remoteCommand name="validateGraph" update="result"
                                      action="#{areaCheck.validateFromGraph()}"
-                                     oncomplete="drawPoint()"-->
+                                     oncomplete="drawPoint()">
                 </h:form>
 
                 <h:form id="db-inputs">
@@ -91,10 +93,10 @@
                 <p>Приложение определяет, входят ли указанные пользователем точки в заданную
                     область.</p>
                 <div id="canvas-div" onmousedown="onCanvasClick(event)">
-                    <!--b:canvas id="canvas"
+                    <b:canvas id="canvas"
                               style="background-color:#ffffff;
                           border-radius: 20px;"
-                              width="300" height="300"-->
+                              width="300" height="300"/>
                 </div>
             </td>
         </tr>
@@ -106,7 +108,7 @@
                         <f:param name="pageId" value="2"/>
                     </h:commandButton>
                 </h:form>
-                <p id="footer-text">&copy; Университет ИТМО 2018</p>
+                <p id="footer-text">&copy; Университет ИТМО 2019</p>
             </td>
         </tr>
     </table>
