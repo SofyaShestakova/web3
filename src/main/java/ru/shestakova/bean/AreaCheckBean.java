@@ -5,30 +5,32 @@ import java.util.Arrays;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.event.ValueChangeEvent;
 
 import lombok.Data;
 
 import static ru.shestakova.util.ConstantValues.DOUBLE_MACHINE_EPSILON;
 
 @ManagedBean(name = "areaCheck", eager = true)
-@RequestScoped
+@SessionScoped
 @Data
 public class AreaCheckBean {
 
     private static final double EPS = DOUBLE_MACHINE_EPSILON;
 
-    private List<Double> xPossibleValues = Arrays.asList(-3D, -2D, -1D, 0D, 1D, 2D, 3D, 4D,5D);
-    private List<Double> rPossibleValues = Arrays.asList(1D, 1.5, 2D, 2.5, 3D,3.5,4D);
-
+    private List<Double> xPossibleValues = Arrays.asList(-3D, -2D, -1D, 0D, 1D, 2D, 3D, 4D, 5D);
     private double currentXValue = -3D;
-    private double currentYValue = -3D;
-    private double currentRValue = 1D;
-
     private double hiddenXValue;
-    private double hiddenRValue;
-    private double hiddenYValue;
-    private String hiddenResultValue;
 
+    private double currentYValue = -3D;
+    private double hiddenYValue;
+
+    private double rMinValue = 1D, rMaxValue = 4D, rStepValue = .5D;
+    private double currentRValue = 1D;
+    private double hiddenRValue;
+
+    private String hiddenResultValue;
     public List<Double> getxPossibleValues() {
         return xPossibleValues;
     }
@@ -51,14 +53,6 @@ public class AreaCheckBean {
 
     public void setCurrentYValue(double currentYValue) {
         this.currentYValue = currentYValue;
-    }
-
-    public List<Double> getrPossibleValues() {
-        return rPossibleValues;
-    }
-
-    public void setrPossibleValues(List<Double> rPossibleValues) {
-        this.rPossibleValues = rPossibleValues;
     }
 
     public double getCurrentRValue() {
@@ -127,5 +121,11 @@ public class AreaCheckBean {
 
     public void validateFromGraph() {
         hiddenResultValue = validateGraph(hiddenXValue, hiddenYValue, hiddenRValue) ? "true" : "false";
+    }
+    public void sliderChanged(ValueChangeEvent valueChangeEvent) {
+        double oldValue = Double.parseDouble(valueChangeEvent.getOldValue().toString());
+        double newValue = Double.parseDouble(valueChangeEvent.getNewValue().toString());
+        this.currentRValue = rMinValue + rStepValue * newValue;
+
     }
 }

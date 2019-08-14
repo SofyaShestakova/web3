@@ -11,20 +11,13 @@ import lombok.Data;
 @SuppressWarnings("ALL")
 @ManagedBean(name = "navigationController", eager = true)
 @RequestScoped
-@Data
-public class NavigationController extends NavigationHandler {
-
-
+public class NavigationController  {
     public String showIndex() {
         return "index";
     }
 
     public String showPlot() {
         return "plot";
-    }
-
-    public void handleNavigation(FacesContext facesContext, String s, String s1) {
-
     }
 }
 

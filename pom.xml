@@ -46,7 +46,7 @@
         </dependency>
         <dependency>
             <groupId>org.icefaces</groupId>
-            <artifactId>icefaces</artifactId>
+            <artifactId>icefaces-ace</artifactId>
             <version>4.3.0</version>
         </dependency>
     </dependencies>
