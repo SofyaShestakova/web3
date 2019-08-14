@@ -37,7 +37,7 @@
                         ${req.y}
                     </h:column>
                     <h:column>
-                        <f:facet name = "header">Y</f:facet>
+                        <f:facet name = "header">R</f:facet>
                         ${req.r}
                     </h:column>
                     <h:column>
@@ -62,7 +62,7 @@
                     <fieldset>
                         <legend>Значение R</legend>
                         <ace:sliderEntry styleClass="input-class" value="#{areaCheck.currentRValue}"
-                                         id="r">
+                                         id="r" min="0" max="4">
                         </ace:sliderEntry>
                     </fieldset>
                     <h:commandButton value="Отправить" action="#{navigationController.showPage()}" onmousedown="">
@@ -75,9 +75,9 @@
                     <h:inputHidden value="#{areaCheck.hiddenYValue}" id="hidden-y"/>
                     <h:inputHidden value="#{areaCheck.hiddenRValue}" id="hidden-r"/>
                     <h:inputHidden value="#{areaCheck.hiddenResultValue}" id="result"/>
-                    <p:remoteCommand name="validateGraph" update="result"
+                    <!--p:remoteCommand name="validateGraph" update="result"
                                      action="#{areaCheck.validateFromGraph()}"
-                                     oncomplete="drawPoint()">
+                                     oncomplete="drawPoint()" immediate="true" /-->
                 </h:form>
 
                 <h:form id="db-inputs">
@@ -93,10 +93,10 @@
                 <p>Приложение определяет, входят ли указанные пользователем точки в заданную
                     область.</p>
                 <div id="canvas-div" onmousedown="onCanvasClick(event)">
-                    <b:canvas id="canvas"
-                              style="background-color:#ffffff;
-                          border-radius: 20px;"
-                              width="300" height="300"/>
+                    <!--<canvas id="canvas"-->
+                              <!--style="background-color:#ffffff;-->
+                          <!--border-radius: 20px;"-->
+                              <!--width="300" height="300"/>-->
                 </div>
             </td>
         </tr>
@@ -104,8 +104,7 @@
             <td id="footer" colspan="3">
                 <h:form>
                     <h:commandButton value="Стартовая страница"
-                                     action="#{navigationController.showPage()}">
-                        <f:param name="pageId" value="2"/>
+                                     action="#{navigationController.showIndex()}">
                     </h:commandButton>
                 </h:form>
                 <p id="footer-text">&copy; Университет ИТМО 2019</p>
