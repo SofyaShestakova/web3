@@ -10,9 +10,9 @@ function drawCanvas(r) {
 
   //прямоугольник
   context.beginPath();
-  context.rect(0, 0, r / 2, r);
+  context.rect(150, 150, 65, 130);
   context.closePath();
-  context.strokeStyle = "blue";
+  context.strokeStyle = "blue;
   context.fillStyle = "blue";
   context.fill();
   context.stroke();
@@ -20,7 +20,7 @@ function drawCanvas(r) {
   // сектор
   context.beginPath();
   context.moveTo(150, 150);
-  context.arc(150, 150, 130, 0, Math.PI / 2, false);
+  context.arc(150, 150, 65, - Math.PI/2,  0, false);
   context.closePath();
   context.strokeStyle = "blue";
   context.fillStyle = "blue";
@@ -29,10 +29,10 @@ function drawCanvas(r) {
 
   //треугольник
   context.beginPath();
-  context.moveTo(0, 0);
-  context.lineTo(r / 2, 0);
-  context.lineTo(0, r / 2);
-  context.lineTo(0, 0);
+  context.moveTo(150, 150);
+  context.lineTo(85, 150);
+  context.lineTo(150, 85);
+  context.lineTo(150, 150);
   context.closePath();
   context.strokeStyle = "blue";
   context.fillStyle = "blue";
