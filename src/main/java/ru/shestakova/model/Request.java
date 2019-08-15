@@ -6,69 +6,33 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Wither;
 
 @Entity
 @Table(name = "request")
 @Data
+@Wither
+@NoArgsConstructor
+@AllArgsConstructor
 public class Request {
 
-    public Request() {
-    }
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
+  private Integer id;
 
-    public double getX() {
-        return x;
-    }
+  @Column(name = "x")
+  private double x;
 
-    public void setX(double x) {
-        this.x = x;
-    }
+  @Column(name = "y")
+  private double y;
 
-    public double getY() {
-        return y;
-    }
+  @Column(name = "r")
+  private double r;
 
-    public void setY(double y) {
-        this.y = y;
-    }
-
-    public double getR() {
-        return r;
-    }
-
-    public void setR(double r) {
-        this.r = r;
-    }
-
-    public Boolean getResult() {
-        return result;
-    }
-
-    public void setResult(Boolean result) {
-        this.result = result;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
-
-    @Column(name = "x")
-    private double x;
-
-    @Column(name = "y")
-    private double y;
-
-    @Column(name = "r")
-    private double r;
-
-    @Column(name = "result")
-    private boolean result;
-
-    public Request(double x, double y, double r, boolean result) {
-        this.x = x;
-        this.y = y;
-        this.r = r;
-        this.result = result;
-    }
+  @Column(name = "result")
+  private boolean result;
 }
