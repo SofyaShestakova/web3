@@ -5,14 +5,15 @@
 <html xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ace="http://www.icefaces.org/icefaces/components"
+      xmlns:b = "http://bootsfaces.net/ui"
       xml:lang="en"
       lang="en">
 <h:head>
     <title>Lab3</title>
-    <h:outputStylesheet library="css" name="style.css"/>
-    <h:outputStylesheet library="js" name="canvas.js"/>
 </h:head>
-<h:body>
+<h:body onload = "drawCanvas(1)">
+    <h:outputStylesheet library="css" name="style.css"/>
+    <h:outputScript library="js" name="canvas.js"/>
     <table>
         <tr>
             <td id="header" colspan="3">
@@ -102,10 +103,10 @@
                 <p>Приложение определяет, входят ли указанные пользователем точки в заданную
                     область.</p>
                 <div id="canvas-div" onmousedown="onCanvasClick(event)">
-                    <!--<canvas id="canvas"-->
-                    <!--style="background-color:#ffffff;-->
-                    <!--border-radius: 20px;"-->
-                    <!--width="300" height="300"/>-->
+                    <b:canvas id="canvas"
+                    style="background-color:#ffffff;
+                    border-radius: 20px;"
+                    width="300" height="300"/>
                 </div>
             </td>
         </tr>
