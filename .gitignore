@@ -1,0 +1,10 @@
+# IntellIJ files
+.idea/
+*.iml
+
+# Output files
+target/
+out/
+
+lib/
+src/main/resources/log4j.properties
