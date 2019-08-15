@@ -1,39 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+<html xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
-   <title>Lab3</title>
-   <h:outputStylesheet library="css" name="style.css"/>
-   <h:outputScript library="js" name="clock.js"/>
+    <title>Lab3</title>
+    <h:outputStylesheet library="css" name="style.css"/>
+    <h:outputScript library="js" name="clock.js"/>
 </h:head>
 <h:body>
-   <table>
-      <tr>
-         <td id="header" colspan="3">
-            <p id="name">
-               Лабораторная работа №3<br/>
-               Группа P3202, Вариант 20258<br/>
-             Выполнила:  Шестакова Софья Александровна<br/>
-            </p>
-         </td>
-      </tr>
-      <tr id="content">
-         <td id="middle-content-column">
-            <h:form>
-               <div id="clock">
-               </div>
-               <h:commandButton value="Домашняя страница" action="#{navigationController.showPlot()}">
-               </h:commandButton>
-            </h:form>
-         </td>
-      </tr>
-      <tr>
-         <td id="footer" colspan="3"><p id="footer-text">&copy; Университет ИТМО 2019</p></td>
-      </tr>
-   </table>
+    <table>
+        <tr>
+            <td id="header" colspan="3">
+                <p id="name">
+                    Лабораторная работа №3<br/>
+                    Группа P3202, Вариант 20258<br/>
+                    Выполнила: Шестакова Софья Александровна<br/>
+                </p>
+            </td>
+        </tr>
+        <tr id="content">
+            <td id="middle-content-column">
+                <h:form>
+                    <div id="clock">
+                    </div>
+                    <h:commandButton value="Домашняя страница"
+                                     action="#{navigationController.showPlotPage}">
+                    </h:commandButton>
+                </h:form>
+            </td>
+        </tr>
+        <tr>
+            <td id="footer" colspan="3"><p id="footer-text">&copy; Университет ИТМО 2019</p></td>
+        </tr>
+    </table>
 </h:body>
 </html>
