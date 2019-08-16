@@ -24,15 +24,15 @@ public class Request {
   @Column(name = "id")
   private Integer id;
 
-  @Column(name = "x")
+  @Column(name = "x", nullable = false, updatable = false)
   private double x;
 
-  @Column(name = "y")
+  @Column(name = "y", nullable = false, updatable = false)
   private double y;
 
-  @Column(name = "r")
+  @Column(name = "r", nullable = false, updatable = false)
   private double r;
 
-  @Column(name = "result")
+  @Column(name = "result", nullable = false, updatable = false)
   private boolean result;
 }
