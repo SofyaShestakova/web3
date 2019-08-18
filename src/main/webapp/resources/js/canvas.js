@@ -12,7 +12,7 @@ function drawCanvas(r) {
   context.beginPath();
   context.rect(150, 150, 65, 130);
   context.closePath();
-  context.strokeStyle = "blue;
+  context.strokeStyle = "blue";
   context.fillStyle = "blue";
   context.fill();
   context.stroke();

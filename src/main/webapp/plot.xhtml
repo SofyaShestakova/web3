@@ -6,6 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ace="http://www.icefaces.org/icefaces/components"
       xmlns:b = "http://bootsfaces.net/ui"
+      xmlns:p = "http://primefaces.org/ui"
       xml:lang="en"
       lang="en">
 <h:head>
@@ -14,6 +15,7 @@
 <h:body onload = "drawCanvas(1)">
     <h:outputStylesheet library="css" name="style.css"/>
     <h:outputScript library="js" name="canvas.js"/>
+    <h:outputScript library="js" name="event_handlers.js"/>
     <table>
         <tr>
             <td id="header" colspan="3">
@@ -74,9 +76,9 @@
                         </ace:sliderEntry>
                         <h:outputText id="outputValue" value="${areaCheck.currentRValue}"/>
                     </fieldset>
-                    <h:commandButton value="Отправить" action="#{navigationController.showPage()}"
-                                     onmousedown="">
-                    </h:commandButton>
+                    <img src="http://pluspng.com/img-png/submit-button-png-submit-button-png-439.png"
+                         onmousedown="onFormSubmit()"
+                         alt="Отправить"/>
                 </h:form>
                 <div id="errors"></div>
 
@@ -85,9 +87,9 @@
                     <h:inputHidden value="#{areaCheck.hiddenYValue}" id="hidden-y"/>
                     <h:inputHidden value="#{areaCheck.hiddenRValue}" id="hidden-r"/>
                     <h:inputHidden value="#{areaCheck.hiddenResultValue}" id="result"/>
-                    <!--p:remoteCommand name="validateGraph" update="result"
+                    <p:remoteCommand name="validateGraph" update="result"
                                      action="#{areaCheck.validateFromGraph()}"
-                                     oncomplete="drawPoint()" immediate="true" /-->
+                                     oncomplete="drawPoint()" immediate="true" />
                 </h:form>
 
                 <h:form id="db-inputs">
