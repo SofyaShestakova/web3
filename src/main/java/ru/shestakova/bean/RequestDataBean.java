@@ -5,6 +5,8 @@ import java.util.List;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import lombok.Data;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.shestakova.model.Request;
 import ru.shestakova.repository.JPARequestRepository;
 import ru.shestakova.repository.RepositoryResponse;
@@ -15,11 +17,14 @@ import ru.shestakova.repository.RequestRepository;
 @Data
 public class RequestDataBean {
 
+  private static final Logger logger = LoggerFactory.getLogger(RequestDataBean.class);
+
   private RequestRepository repository;
   private double x;
   private double y;
   private double r;
   private String result;
+  private Integer size = 0;
 
   public RequestDataBean() {
     this(new JPARequestRepository());
@@ -46,10 +51,13 @@ public class RequestDataBean {
     if (response.isSuccess()) {
       List<Request> requests = response.getResult();
       Collections.reverse(requests);
+      logger.debug("getRequests(): returning list of size {}", requests.size());
+      this.size = requests.size();
       return requests;
-      //return requests.subList(Math.max(0, requests.size() - 10), requests.size()); // todo normalize
     } else {
       // todo implement behaviour
+      logger.debug("getRequests(): returning empty list");
+      this.size = 0;
       return Collections.emptyList();
     }
   }
@@ -64,10 +72,10 @@ public class RequestDataBean {
 
     RepositoryResponse<Void> response = repository.addRequest(request);
     if (response.isSuccess()) {
-      System.out.println("Added " + request.toString());
+      logger.debug("addRequest(): added {}", request.toString());
       return request;
     } else {
-      System.out.println("Could not add given request: " + response.getException().getMessage());
+      logger.debug("addRequest(): could not add request: {}", response.getException().getMessage());
       return null;
     }
   }

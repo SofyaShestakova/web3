@@ -4,6 +4,10 @@ let lastR = 0;
 
 function drawCanvas(r) {
   let canvas = document.querySelector("#canvas");
+  if(canvas == null) {
+    return;
+  }
+
   let context = canvas.getContext("2d");
   //очистка
   context.clearRect(0, 0, canvas.width, canvas.height);
@@ -20,7 +24,7 @@ function drawCanvas(r) {
   // сектор
   context.beginPath();
   context.moveTo(150, 150);
-  context.arc(150, 150, 65, - Math.PI/2,  0, false);
+  context.arc(150, 150, 65, -Math.PI / 2, 0, false);
   context.closePath();
   context.strokeStyle = "blue";
   context.fillStyle = "blue";
@@ -111,7 +115,6 @@ function drawPoint() {
   }
   context.fill();
   context.stroke();
-  //updateTable();
 }
 
 // todo
@@ -120,6 +123,7 @@ function checkPoint(x, y, r) {
   let hiddenY = document.getElementById("graph-controls:hidden-y");
   let hiddenR = document.getElementById("graph-controls:hidden-r");
   let hiddenResult = document.getElementById("graph-controls:result");
+
   if (isClick) {
     //hiddenX.value = ((x * 130) + 150) / r;
     //hiddenY.value = (150 - (y * 130)) / r;
@@ -132,47 +136,24 @@ function checkPoint(x, y, r) {
     hiddenY.value = y;
   }
   hiddenR.value = r;
+
   lastX = hiddenX.value;
   lastY = hiddenY.value;
   lastR = hiddenR.value;
+
   validateGraph();
 }
 
-function checkPointLocally(x, y, r) {
-  x = (x - 150) / 130;
-  y = (150 - y) / 130;
-
-  if (r < 0) {
-    return false;
-  }
-
-  let res;
-  if (x <= 0 && y <= 0) {
-    res = (x >= -r && y >= -r / 2);
-  } else if (x < 0) {
-    if (Math.abs(x) > r || Math.abs(y) > r) {
-      res = false;
-    } else {
-      res = (Math.sqrt(x * x + y * y) <= r / 2);
-    }
-  } else {
-    res = (y <= -x + r && y >= 0);
-  }
-
-  return res;
-
-  /*
-  function writeDB() {
-      drawPoint();
-      let dbResult = document.getElementById("db-inputs:db-result");
-      let dbX = document.getElementById("db-inputs:db-x");
-      let dbY = document.getElementById("db-inputs:db-y");
-      let dbR = document.getElementById("db-inputs:db-r");
-      let result = document.getElementById("graph-controls:result").value;
-      dbX.value = lastX;
-      dbY.value = lastY;
-      dbR.value = lastR;
-      dbResult.value = result;
-      save();
-      */
+function writeDB() {
+  drawPoint();
+  let dbResult = document.getElementById("db-inputs:db-result");
+  let dbX = document.getElementById("db-inputs:db-x");
+  let dbY = document.getElementById("db-inputs:db-y");
+  let dbR = document.getElementById("db-inputs:db-r");
+  let result = document.getElementById("graph-controls:result").value;
+  dbX.value = lastX;
+  dbY.value = lastY;
+  dbR.value = lastR;
+  dbResult.value = result;
+  save();
 }

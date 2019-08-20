@@ -7,8 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.event.ValueChangeEvent;
 import lombok.Data;
+import org.primefaces.event.SlideEndEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,21 +58,22 @@ public class AreaCheckBean {
   }
 
   public void validateFromGraph() {
+    logger.debug(
+        "validateFromGraph(): Validating X:{}, Y:{}, R:{}", hiddenXValue, hiddenYValue, hiddenRValue
+    );
     this.hiddenResultValue =
         validateGraph(hiddenXValue, hiddenYValue, hiddenRValue) ? "true" : "false";
   }
 
-  public void sliderChanged(ValueChangeEvent valueChangeEvent) {
-    double oldValue = Double.parseDouble(valueChangeEvent.getOldValue().toString());
-    double newValue = Double.parseDouble(valueChangeEvent.getNewValue().toString());
-
-    this.currentRValue = rMinValue + rStepValue * newValue;
+  public void onSlideEnd(SlideEndEvent valueChangeEvent) {
+    double value = valueChangeEvent.getValue();
 
     logger.debug(
-        "Old: {}, New: {}, Current: {}",
-        oldValue,
-        newValue,
-        currentRValue
+        "onSlideEnd(): Old: {}, Current: {}",
+        currentRValue,
+        value
     );
+
+    this.currentRValue = value;
   }
 }
