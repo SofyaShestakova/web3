@@ -1,8 +1,6 @@
 package ru.shestakova.bean;
 
 
-import static ru.shestakova.util.ConstantValues.DOUBLE_MACHINE_EPSILON;
-
 import java.util.Arrays;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -11,6 +9,7 @@ import lombok.Data;
 import org.primefaces.event.SlideEndEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.shestakova.util.ConstantValues;
 
 @ManagedBean(name = "areaCheck", eager = true)
 @SessionScoped
@@ -18,7 +17,7 @@ import org.slf4j.LoggerFactory;
 public class AreaCheckBean {
 
   private static final Logger logger = LoggerFactory.getLogger(AreaCheckBean.class);
-  private static final double EPS = DOUBLE_MACHINE_EPSILON;
+  private static final double EPS = ConstantValues.getMachineEpsilon();
 
   private final List<Double> xPossibleValues =
       Arrays.asList(-3D, -2D, -1D, 0D, 1D, 2D, 3D, 4D, 5D);
@@ -34,22 +33,28 @@ public class AreaCheckBean {
   private String hiddenResultValue;
 
   public static boolean validateGraph(double x, double y, double r) {
-    if (Math.abs(y) <= EPS) {
-      return r - Math.abs(x) >= 0;
-    }
-
-    if (Math.abs(x) <= EPS) {
-      return r - Math.abs(y) >= 0;
-    }
-
-    if ((x > 0) && (y > 0)) {
-      return (y + 2 * x <= r);
-    } else if ((x > 0) && (y < 0)) {
-      return (Math.sqrt(x * x + y * y) <= r);
-    } else if ((x < 0) && (y > 0)) {
-      return (x >= -r) && (y <= r);
+    // x < 0
+    if (x < -EPS) {
+      if (y >= 0) {
+        // y >= 0 and y <= x + 0.5r
+        return (y - (x + 0.5 * r) <= -EPS);
+      } else {
+        // y < 0
+        return false;
+      }
+    } else if (Math.abs(x) <= EPS) {
+      // x == 0
+      // -r <= y <= r/2
+      return (r / 2 - r >= -EPS) && (y + r >= -EPS);
     } else {
-      return false;
+      // x > 0
+      if (y > EPS) {
+        // y > 0 && (x^2 + y^2 <= (r/2)^2)
+        return y * y + x * x - r * r / 4 <= -EPS;
+      } else {
+        // y <= 0 && (x <= r/2) && (y >= -r)
+        return (x - r / 2 <= EPS) && (y + r >= -EPS);
+      }
     }
   }
 

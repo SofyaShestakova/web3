@@ -6,11 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Wither;
 
-@Wither
-@Getter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter @Wither @ToString
+@AllArgsConstructor @NoArgsConstructor
 public class RepositoryResponse<T> {
 
   private boolean success;
@@ -42,7 +39,7 @@ public class RepositoryResponse<T> {
   }
 
   public T ensureSuccess() {
-    if(!success) {
+    if (!success) {
       throw new RuntimeException(exception);
     } else {
       return result;

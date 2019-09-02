@@ -12,15 +12,12 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Wither;
 
 @Entity
-@Table(name = "request")
-@Data
-@Wither
-@NoArgsConstructor
-@AllArgsConstructor
+@Table
+@Data @Wither
+@NoArgsConstructor @AllArgsConstructor
 public class Request {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
   private Integer id;
 

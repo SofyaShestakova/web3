@@ -10,8 +10,4 @@ public interface RequestRepository {
   RepositoryResponse<List<Request>> getAllRequests();
 
   RepositoryResponse<Void> deleteAllRequests();
-
-  RepositoryResponse<Void> createTable();
-
-  RepositoryResponse<Void> dropTable();
 }

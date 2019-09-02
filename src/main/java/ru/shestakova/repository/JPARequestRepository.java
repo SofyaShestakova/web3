@@ -15,11 +15,7 @@ public class JPARequestRepository implements RequestRepository {
   private static final String PERSISTENCE_UNIT_NAME = "helios";
 
   private final EntityManagerFactory factory;
-
-//  @PersistenceUnit(name = "helios_pg")
-//  @PersistenceContext(unitName = PERSISTENCE_UNIT_NAME)
-//  @Inject
-  private EntityManager entityManager;
+  private final EntityManager entityManager;
 
   public JPARequestRepository() {
     this.factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
@@ -51,7 +47,8 @@ public class JPARequestRepository implements RequestRepository {
   @Override
   public RepositoryResponse<List<Request>> getAllRequests() {
     try {
-      Query query = entityManager.createNativeQuery("SELECT * FROM request;", Request.class);
+      Query query = entityManager.createQuery("select request from Request request", Request.class);
+
       List<Request> resultList = (List<Request>) query.getResultList();
 
       return RepositoryResponse.getSuccessResponseWith(resultList);
@@ -68,58 +65,7 @@ public class JPARequestRepository implements RequestRepository {
         transaction.begin();
       }
 
-      Query query = entityManager.createNativeQuery("DELETE FROM request;");
-      query.executeUpdate();
-      transaction.commit();
-
-      return RepositoryResponse.getSuccessResponseWith(null);
-    } catch (RollbackException | IllegalStateException ex) {
-      return RepositoryResponse.getFailResponseWith(ex);
-    } catch (Exception ex) {
-      transaction.rollback();
-      return RepositoryResponse.getFailResponseWith(ex);
-    }
-  }
-
-  @Override
-  public RepositoryResponse<Void> createTable() {
-    EntityTransaction transaction = entityManager.getTransaction();
-    try {
-      if (!transaction.isActive()) {
-        transaction.begin();
-      }
-
-      Query query = entityManager.createNativeQuery(
-          "CREATE TABLE IF NOT EXISTS request (\n"
-              + "   id     SERIAL NOT NULL,\n"
-              + "   x      REAL   NOT NULL,\n"
-              + "   y      REAL   NOT NULL,\n"
-              + "   r      REAL   NOT NULL,\n"
-              + "   result BOOLEAN NOT NULL,\n"
-              + "   PRIMARY KEY (id)\n"
-              + ");"
-      );
-      query.executeUpdate();
-      transaction.commit();
-
-      return RepositoryResponse.getSuccessResponseWith(null);
-    } catch (RollbackException | IllegalStateException ex) {
-      return RepositoryResponse.getFailResponseWith(ex);
-    } catch (Exception ex) {
-      transaction.rollback();
-      return RepositoryResponse.getFailResponseWith(ex);
-    }
-  }
-
-  @Override
-  public RepositoryResponse<Void> dropTable() {
-    EntityTransaction transaction = entityManager.getTransaction();
-    try {
-      if (!transaction.isActive()) {
-        transaction.begin();
-      }
-
-      Query query = entityManager.createNativeQuery("DROP TABLE IF EXISTS request;");
+      Query query = entityManager.createQuery("delete from Request");
       query.executeUpdate();
       transaction.commit();
 
