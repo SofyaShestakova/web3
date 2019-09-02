@@ -6,5 +6,6 @@
 target/
 out/
 
-lib/
 src/main/resources/log4j.properties
+src/main/resources/hibernate.cfg.xml
+src/main/resources/META-INF/persistence.xml

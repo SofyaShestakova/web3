@@ -1,16 +1,21 @@
 package ru.shestakova.util;
 
+import lombok.Getter;
+import lombok.experimental.UtilityClass;
+
+@UtilityClass
 public class ConstantValues {
 
-  public static final double DOUBLE_MACHINE_EPSILON;
+  @Getter(lazy = true)
+  private final double machineEpsilon = countMachineEpsilon();
 
-  static {
+  private double countMachineEpsilon() {
     double dTemp = 0.5D;
 
     while (1 + dTemp > 1) {
       dTemp /= 2;
     }
 
-    DOUBLE_MACHINE_EPSILON = dTemp;
+    return dTemp;
   }
 }

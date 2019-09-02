@@ -6,7 +6,6 @@ function onFormSubmit() {
   let xField = document.getElementById("data-form:x");
   let yField = document.getElementById("data-form:y");
   let rField = document.getElementById("data-form:r");
-  let form = document.querySelector("#data-form");
   currentR = rField.value;
 
   let errorMessageBody = "<b>There are the following errors in the form:</b><br>";
@@ -20,8 +19,8 @@ function onFormSubmit() {
   } else if (valueY.length > 12) {
     errorMessageBody += "The length of the Y should not exceed 12 symbols<br>";
     valid = false;
-  } else if (parseFloat(valueY) < -3 || parseFloat(valueY) > 3) {
-    errorMessageBody += "Y value should be in interval [-5; 5]<br>";
+  } else if (parseFloat(valueY) < -3 || parseFloat(valueY) > 5) {
+    errorMessageBody += "Y value should be in interval [-3; 5]<br>";
     valid = false;
   }
 
@@ -30,13 +29,14 @@ function onFormSubmit() {
     return;
   }
 
-  console.log("Checking point: " + valueX + " " + valueY);
+  console.log("Checking point: "
+      + "(" + valueX + "," + valueY + ") "
+      + "for R: " + currentR);
 
   checkPoint(valueX, valueY, currentR);
-
 }
 
-function onRadiusInput() {
+function onRadiusInput(event, ui) {
   let rField = document.getElementById("data-form:r");
   currentR = rField.options[rField.selectedIndex].value;
   document.getElementById("graph-controls:hidden-r").value = currentR;
@@ -56,4 +56,5 @@ function onCanvasClick(event) {
   console.log("Raw data: " + x + " " + y);
 
   checkPoint(x, y, currentR);
+  drawCanvas(currentR);
 }
