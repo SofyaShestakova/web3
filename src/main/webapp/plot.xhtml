@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns:h="http://xmlns.jcp.org/jsf/html"
+<html xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:p="http://primefaces.org/ui"
@@ -89,6 +89,8 @@
                                   minValue="#{areaCheck.RMinValue}"
                                   maxValue="#{areaCheck.RMaxValue}"
                                   step="#{areaCheck.RStepValue}"
+                                  display="r_text"
+                                  onSlide="drawCanvas(currentR)"
                                   onSlideEnd="onRadiusInput(event, ui)">
                             <p:ajax event="slideEnd" listener="#{areaCheck.onSlideEnd}"
                                     update="r_text"/>
@@ -118,9 +120,8 @@
                     область.</p>
                 <div id="canvas-div" onmousedown="onCanvasClick(event)" width="300" height="300">
                     <b:canvas id="canvas"
-                    style="background-color:#ffffff;
-                    border-radius: 20px;"
-                    width="300" height="300"/>
+                              style="background-color:#ffffff; border-radius: 20px;"
+                              width="300" height="300"/>
                 </div>
             </td>
         </tr>

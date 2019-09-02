@@ -19,8 +19,8 @@ function onFormSubmit() {
   } else if (valueY.length > 12) {
     errorMessageBody += "The length of the Y should not exceed 12 symbols<br>";
     valid = false;
-  } else if (parseFloat(valueY) < -3 || parseFloat(valueY) > 3) {
-    errorMessageBody += "Y value should be in interval [-5; 5]<br>";
+  } else if (parseFloat(valueY) < -3 || parseFloat(valueY) > 5) {
+    errorMessageBody += "Y value should be in interval [-3; 5]<br>";
     valid = false;
   }
 
@@ -56,4 +56,5 @@ function onCanvasClick(event) {
   console.log("Raw data: " + x + " " + y);
 
   checkPoint(x, y, currentR);
+  drawCanvas(currentR);
 }
