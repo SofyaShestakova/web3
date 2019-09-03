@@ -38,7 +38,7 @@ function onFormSubmit() {
 
 function onRadiusInput(event, ui) {
   let rField = document.getElementById("data-form:r");
-  currentR = rField.options[rField.selectedIndex].value;
+  currentR = rField.value;
   document.getElementById("graph-controls:hidden-r").value = currentR;
   drawCanvas(currentR);
 }
@@ -56,5 +56,4 @@ function onCanvasClick(event) {
   console.log("Raw data: " + x + " " + y);
 
   checkPoint(x, y, currentR);
-  drawCanvas(currentR);
 }
